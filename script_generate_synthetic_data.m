@@ -5,8 +5,8 @@ script_generate_synthetic_data.m
 rng('default'); % for repoducibility
 % republican = 1, democrat = 2
 
-% state.population, 
-% state.size, 
+% state_population, 
+% state_size, 
 % city_radiuses, 
 % city_centers,
 % city_populations, 
@@ -41,6 +41,15 @@ rng('default'); % for repoducibility
                                               [0.5,0.3,0.1,0.05]', ...
                                               [0.9,0.7,0.3,0.2]', ...
                                               0.1);                  
+[toy, toy_information] = generate_state(500, ...
+                                        [1000,1000], ...
+                                        [100]', ...
+                                        [[300 600];], ...
+                                        [0.8]', ...
+                                        [0.9]', ...
+                                        0.1);                  
+
+                                          
 %%%
 figure,
 scatter(utah_information.homes(utah_information.republicans,1),utah_information.homes(utah_information.republicans,2),'r.'), hold on,
@@ -60,6 +69,11 @@ scatter(oregon_information.homes(oregon_information.democrats,1),oregon_informat
 legend('republicans','democrats'), title('Oregon'), xlim([0 10000]), ylim([0 10000]), axis tight,
 disp(['Oregon: percent of democrats: ',num2str(size(oregon_information.democrats,1)/oregon_information.population), ', percent of republicans: ',num2str(size(oregon_information.republicans,1)/oregon_information.population)]);
 
+figure,
+scatter(toy_information.homes(toy_information.republicans,1),toy_information.homes(toy_information.republicans,2),'r.'), hold on,
+scatter(toy_information.homes(toy_information.democrats,1),toy_information.homes(toy_information.democrats,2),'b.'), hold on,
+legend('republicans','democrats'), title('Toy'), xlim([0 10000]), ylim([0 10000]), axis tight,
+disp(['Toy: percent of democrats: ',num2str(size(toy_information.democrats,1)/toy_information.population), ', percent of republicans: ',num2str(size(toy_information.republicans,1)/toy_information.population)]);
 
 
 
