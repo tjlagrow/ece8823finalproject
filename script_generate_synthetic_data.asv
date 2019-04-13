@@ -2,15 +2,11 @@
 script_generate_synthetic_data.m
 
 %}
-rng('default'); % for repoducibility
-% republican = 1, democrat = 2
+rng('default');
+% democrat = 2, republican = 1
 
-% state.population, 
-% state.size, 
-% city_radiuses, 
-% city_centers,
-% city_populations, 
-% city_political_affiliations, 
+% state.population, state.size, city_radiuses, city_centers,
+% city_populations, city_political_affiliations, 
 % state_political_affiliations
 [utah, utah_information] = generate_state(10000, ...
                                           [15000,10000], ...
@@ -31,14 +27,14 @@ rng('default'); % for repoducibility
                                               [0.8,0.3]', ...
                                               0.2);
                   
-[oregon, oregon_information] = generate_state(18000, ...
+[oregon, oregon_information] = generate_state(17000, ...
                                               [20000,15000], ...
                                               [700,450,200,100]', ...
                                               [[10000 4000]; ...
-                                               [6000 13000]; ...
+                                               [600 000]; ...
                                                [17000 10000]; ...
                                                [3000 4000]], ...
-                                              [0.5,0.3,0.1,0.05]', ...
+                                              [0.4,0.3,0.1,0.1]', ...
                                               [0.9,0.7,0.3,0.2]', ...
                                               0.1);                  
 %%%
@@ -48,17 +44,7 @@ scatter(utah_information.homes(utah_information.democrats,1),utah_information.ho
 legend('republicans','democrats'), title('Utah'), xlim([0 10000]), ylim([0 10000]), axis tight,
 disp(['Utah: percent of democrats: ',num2str(size(utah_information.democrats,1)/utah_information.population), ', percent of republicans: ',num2str(size(utah_information.republicans,1)/utah_information.population)]);
 
-figure,
-scatter(kansas_information.homes(kansas_information.republicans,1),kansas_information.homes(kansas_information.republicans,2),'r.'), hold on,
-scatter(kansas_information.homes(kansas_information.democrats,1),kansas_information.homes(kansas_information.democrats,2),'b.'), hold on,
-legend('republicans','democrats'), title('Kansas'), xlim([0 10000]), ylim([0 10000]), axis tight,
-disp(['Kansas: percent of democrats: ',num2str(size(kansas_information.democrats,1)/kansas_information.population), ', percent of republicans: ',num2str(size(kansas_information.republicans,1)/kansas_information.population)]);
 
-figure,
-scatter(oregon_information.homes(oregon_information.republicans,1),oregon_information.homes(oregon_information.republicans,2),'r.'), hold on,
-scatter(oregon_information.homes(oregon_information.democrats,1),oregon_information.homes(oregon_information.democrats,2),'b.'), hold on,
-legend('republicans','democrats'), title('Oregon'), xlim([0 10000]), ylim([0 10000]), axis tight,
-disp(['Oregon: percent of democrats: ',num2str(size(oregon_information.democrats,1)/oregon_information.population), ', percent of republicans: ',num2str(size(oregon_information.republicans,1)/oregon_information.population)]);
 
 
 
