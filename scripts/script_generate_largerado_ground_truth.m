@@ -4,7 +4,6 @@ script to show the ground truth used to justify the efficicy of our methods
 This script uses largerado as the exam
 %}
 
-isRandomization = 1;
 isPlot = 0;
 
 %% init

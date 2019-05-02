@@ -44,7 +44,7 @@ if isPlot == 1
     figure,
     scatter(newflormedium_information.homes(newflormedium_information.republicans,1),newflormedium_information.homes(newflormedium_information.republicans,2),'r.'), hold on,
     scatter(newflormedium_information.homes(newflormedium_information.democrats,1),newflormedium_information.homes(newflormedium_information.democrats,2),'b.'), hold on,
-    scatter(city_centers(:,1), city_centers(:,2), 50, 'kx'),
+    scatter(city_centers(:,1), city_centers(:,2), 150, 'k+'),
     legend('republicans','democrats','city center'), title('New Flormedium'), xlim([0 10000]), ylim([0 10000]), axis tight,
 end
 

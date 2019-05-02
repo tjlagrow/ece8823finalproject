@@ -3,6 +3,7 @@ function [state, state_infomation] = generate_state(state_population, state_size
 %   Detailed explanation goes here
 state_infomation.population = state_population;
 state_infomation.size = state_size;
+state_infomation.city_centers = city_centers;
 
 %%% radius, center, population, political_affiliation, state 
 cities = generate_cities(city_radiuses, city_centers, city_populations, city_political_affiliations, state_infomation);

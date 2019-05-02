@@ -1,11 +1,11 @@
-function [people_struct,idx,C] = standard_kmeans_alg(state_information,clusters,numReplicates,isPlot,isDetails)
+function [people_struct,idx,C] = soft_start_kmeans(state_information,clusters,numReplicates,isPlot,isDetails)
 %KMEANS_ALG Summary of this function goes here
 %   Detailed explanation goes here
 
-if nargin < 4 
+if nargin < 3 
     isPlot = 1;
 end
-if nargin < 5
+if nargin < 4
     isDetails = 1;
 end
 
@@ -21,6 +21,12 @@ if isempty(p)
     parpool(poolsize)
 end
 
+%% generate the soft start
+
+[starting_centers] = generate_soft_start_centroids(state_information, clusters, numReplicates);
+
+%% run kmeans
+
 if isDetails == 1
     opts = statset('Display','final', 'UseParallel', true);
 else
@@ -28,8 +34,8 @@ else
 
 end
 
-[idx,C] = kmeans(X(:,1:2),clusters,'Distance','cityblock',...
-                 'Replicates',numReplicates,'Options',opts,'MaxIter',1000);
+[idx,C] = kmeans(X(:,1:2),clusters,'Distance','cityblock', 'Start', starting_centers, ...
+                 'Options',opts,'MaxIter',1000);
 
 people_struct = cell(clusters,1);
 for i = 1:clusters
@@ -70,4 +76,5 @@ if isDetails == 1
 end
 
 end
+
 

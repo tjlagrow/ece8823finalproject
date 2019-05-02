@@ -11,10 +11,21 @@ script_generate_data;
 script_generate_smallerado_ground_truth;
 script_generate_largerado_ground_truth;
 
-%% Step 3: Standard kmeans
+%% Step 3: Evaluate ground truth
 
-script_run_kmeans_alg;
+script_evaluate_ground_truth;
 
-%% Step 4: Warm Start kmeans
+%% Step 4: Standard kmeans
 
-%% more...
+script_run_standard_kmeans;
+
+%% Step 5: Warm Start kmeans
+
+script_run_soft_start_kmeans;
+
+%% Step 5: Warm Start with Compactness Regularization/s
+
+script_run_soft_start_L1_min_kmeans;
+
+script_run_soft_start_L2_min_kmeans;
+

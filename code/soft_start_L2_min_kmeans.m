@@ -1,11 +1,11 @@
-function [people_struct,idx,C] = standard_kmeans_alg(state_information,clusters,numReplicates,isPlot,isDetails)
+function [people_struct,idx,C] = soft_start_L2_min_kmeans(state_information,clusters,numReplicates,isPlot,isDetails)
 %KMEANS_ALG Summary of this function goes here
 %   Detailed explanation goes here
 
-if nargin < 4 
+if nargin < 3 
     isPlot = 1;
 end
-if nargin < 5
+if nargin < 4
     isDetails = 1;
 end
 
@@ -21,23 +21,43 @@ if isempty(p)
     parpool(poolsize)
 end
 
-if isDetails == 1
-    opts = statset('Display','final', 'UseParallel', true);
-else
-    opts = statset('Display','off', 'UseParallel', true);
+%% generate the soft start
 
+[starting_centers] = generate_soft_start_centroids(state_information, clusters, numReplicates);
+
+%% run kmeans
+
+opts = statset('Display','off', 'UseParallel', true);
+compactness_struct = cell(numReplicates, 1);
+for n = 1:numReplicates
+    [idx,C] = kmeans(X(:,1:2),clusters,'Distance','cityblock', 'Start', starting_centers(:,:,n), ...
+                     'Options',opts,'MaxIter',1000);
+
+    people_struct = cell(clusters,1);
+    for i = 1:clusters
+        p = X(idx==i,:);
+        people_struct{i} = p;
+    end
+
+    [~,~,L2] = evaluate_compactness(people_struct,C);
+    compactness_struct{n}.L2 = L2;
+    compactness_struct{n}.people_struct = people_struct;
+    compactness_struct{n}.C = C;
+    compactness_struct{n}.idx = idx;
 end
 
-[idx,C] = kmeans(X(:,1:2),clusters,'Distance','cityblock',...
-                 'Replicates',numReplicates,'Options',opts,'MaxIter',1000);
-
-people_struct = cell(clusters,1);
-for i = 1:clusters
-    p = X(idx==i,:);
-    people_struct{i} = p;
+clear L1_min;
+L2_min.L2 = Inf;
+for i = 1:numReplicates
+    if compactness_struct{i}.L2 < L2_min.L2
+        L2_min = compactness_struct{i};
+    end
 end
 
-
+idx = L2_min.idx;
+C = L2_min.C;
+people_struct = L2_min.people_struct;
+                                        
 %% Plotting
 
 if isPlot == 1
@@ -70,4 +90,5 @@ if isDetails == 1
 end
 
 end
+
 
