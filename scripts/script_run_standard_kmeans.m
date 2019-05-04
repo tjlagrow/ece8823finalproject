@@ -7,7 +7,7 @@ script to evaluate standard kmeans with replacement
 %% run standard kmeans with 10 replacements and L1 minimization
 
 %%% toysylvania
-clusters = 4; numReplicates = 10; isPlot = 0; isDetails = 0; 
+clusters = 4; numReplicates = 10; isPlot = 1; isDetails = 0; 
 [toysylvania_people_in_clusters, toysylvania_clusters_idx, toysylvania_cluster_centers] = ...
     standard_kmeans_alg(toysylvania_information,clusters,numReplicates,isPlot,isDetails);                       
 [cluster_norm_standard_kmeans_toysylvania, ...
@@ -18,7 +18,7 @@ clusters = 4; numReplicates = 10; isPlot = 0; isDetails = 0;
 
 
 %%% newflormedium
-clusters = 5; numReplicates = 10; isPlot = 0; isDetails = 0; 
+clusters = 5; numReplicates = 10; isPlot = 1; isDetails = 0; 
 [newflormedium_people_in_clusters, newflormedium_clusters_idx, newflormedium_cluster_centers] = ...
     standard_kmeans_alg(newflormedium_information,clusters,numReplicates,isPlot,isDetails);                          
 [cluster_norm_standard_kmeans_newflormedium, ...
@@ -29,7 +29,7 @@ clusters = 5; numReplicates = 10; isPlot = 0; isDetails = 0;
 
 
 %%% smallerado
-clusters = 7; numReplicates = 10; isPlot = 0; isDetails = 0; 
+clusters = 7; numReplicates = 10; isPlot = 1; isDetails = 0; 
 [smallerado_people_in_clusters, smallerado_clusters_idx, smallerado_cluster_centers] = ...
     standard_kmeans_alg(smallerado_information,clusters,numReplicates,isPlot,isDetails);                          
 [cluster_norm_standard_kmeans_smallerado, ...
@@ -39,7 +39,7 @@ clusters = 7; numReplicates = 10; isPlot = 0; isDetails = 0;
                                          smallerado_cluster_centers);
 
 %%% largerado
-clusters = 7; numReplicates = 10; isPlot = 1; isDetails = 0;
+clusters = 7; numReplicates = 10; isPlot = 0; isDetails = 0;
 [largerado_people_in_clusters, largerado_clusters_idx, largerado_cluster_centers] = ...
     standard_kmeans_alg(largerado_information,clusters,numReplicates,isPlot,isDetails);                         
 [cluster_norm_standard_kmeans_largerado, ...

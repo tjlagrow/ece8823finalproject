@@ -6,7 +6,7 @@ script to help evaluate the soft start with the compact constrant of L1
 %% Increase the compactness by minimizing the L1 distance intracluster
 
 %%% toysylvania
-clusters = 4; numReplicates = 10; isPlot = 0; isDetails = 1;
+clusters = 4; numReplicates = 10; isPlot = 1; isDetails = 0;
 [toysylvania_people_in_clusters_soft_L1, toysylvania_clusters_idx_soft_L1, toysylvania_cluster_centers_soft_L1] = ...
     soft_start_L1_min_kmeans(toysylvania_information,clusters,numReplicates,isPlot,isDetails);                       
 [cluster_norm_soft_start_L1_min_kmeans_toysylvania, ...
@@ -17,7 +17,7 @@ clusters = 4; numReplicates = 10; isPlot = 0; isDetails = 1;
                                         
 
 %%% newflormedium
-clusters = 5; numReplicates = 10; isPlot = 0; isDetails = 1;
+clusters = 5; numReplicates = 10; isPlot = 1; isDetails = 0;
 [newflormedium_people_in_clusters_soft_L1, newflormedium_clusters_idx_soft_L1, newflormedium_cluster_centers_soft_L1] = ...
     soft_start_L1_min_kmeans(newflormedium_information,clusters,numReplicates,isPlot,isDetails);                       
 [cluster_norm_soft_start_L1_min_kmeans_newflormedium, ...
@@ -27,7 +27,7 @@ clusters = 5; numReplicates = 10; isPlot = 0; isDetails = 1;
                                             newflormedium_cluster_centers_soft_L1);
                                         
 %%% smallerado
-clusters = 7; numReplicates = 10; isPlot = 0; isDetails = 1;
+clusters = 7; numReplicates = 10; isPlot = 1; isDetails = 0;
 [smallerado_people_in_clusters_soft_L1, smallerado_clusters_idx_soft_L1, smallerado_cluster_centers_soft_L1] = ...
     soft_start_L1_min_kmeans(smallerado_information,clusters,numReplicates,isPlot,isDetails);                       
 [cluster_norm_soft_start_L1_min_kmeans_smallerado, ...
@@ -37,7 +37,7 @@ clusters = 7; numReplicates = 10; isPlot = 0; isDetails = 1;
                                             smallerado_cluster_centers_soft_L1);
 
 %%% largerado
-clusters = 7; numReplicates = 10; isPlot = 1; isDetails = 1;
+clusters = 7; numReplicates = 10; isPlot = 0; isDetails = 0;
 [largerado_people_in_clusters_soft_L1, largerado_clusters_idx_soft_L1, largerado_cluster_centers_soft_L1] = ...
     soft_start_L1_min_kmeans(largerado_information,clusters,numReplicates,isPlot,isDetails);                       
 [cluster_norm_soft_start_L1_min_kmeans_largerado, ...

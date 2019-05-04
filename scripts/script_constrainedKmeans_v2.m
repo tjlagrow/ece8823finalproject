@@ -1,13 +1,14 @@
 %% Balanced K-means with gravity (BKMG)
 %
+
 clc; 
-%% Toy example
 %K = 9; % define number of clusters
 colcode = ["r.", "g.", "b.", "y.","c.", "m.", "k.","c.", "m.", "k.","b.", "y.","c.",]; % define cluster colors (must have at least K elements)
+load Xsaved.mat
+N = length(Xsaved);
 
+%% process
 for K = [2,4,6,7]
-    %load Xsaved.mat
-    N = length(Xsaved);
 
     %% test a mixture of Gaussians
     % X(:, 1:N/3) = (1.5.*randn(2, N/3) + [5; 3]); 
