@@ -37,7 +37,7 @@ clusters = 7; numReplicates = 10; isPlot = 0; isDetails = 1;
                                             smallerado_cluster_centers_soft);
                                                                              
 %%% largerado
-clusters = 7; numReplicates = 10; isPlot = 0; isDetails = 1; 
+clusters = 7; numReplicates = 10; isPlot = 1; isDetails = 1; 
 [largerado_people_in_clusters_soft, largerado_clusters_idx_soft, largerado_cluster_centers_soft] = ...
     soft_start_kmeans(largerado_information,clusters,numReplicates,isPlot,isDetails);                       
 [cluster_norm_soft_start_kmeans_largerado, ...

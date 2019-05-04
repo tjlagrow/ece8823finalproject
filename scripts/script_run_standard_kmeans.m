@@ -39,7 +39,7 @@ clusters = 7; numReplicates = 10; isPlot = 0; isDetails = 0;
                                          smallerado_cluster_centers);
 
 %%% largerado
-clusters = 7; numReplicates = 10; isPlot = 0; isDetails = 0;
+clusters = 7; numReplicates = 10; isPlot = 1; isDetails = 0;
 [largerado_people_in_clusters, largerado_clusters_idx, largerado_cluster_centers] = ...
     standard_kmeans_alg(largerado_information,clusters,numReplicates,isPlot,isDetails);                         
 [cluster_norm_standard_kmeans_largerado, ...
@@ -47,3 +47,6 @@ clusters = 7; numReplicates = 10; isPlot = 0; isDetails = 0;
     L2_max_standard_kmeans_largerado] = evaluate_compactness(...
                                         largerado_people_in_clusters, ...
                                         largerado_cluster_centers);
+                                    
+                                    
+                                    

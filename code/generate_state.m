@@ -1,12 +1,17 @@
-function [state, state_infomation] = generate_state(state_population, state_size, city_radiuses, city_centers, city_populations, city_political_affiliations, state_political_affiliations)
+function [state, state_infomation] = generate_state(state_population, state_size, city_radiuses, city_centers, city_populations, city_political_affiliations, state_political_affiliations, isDisplay)
 %GENERATE_STATE Summary of this function goes here
 %   Detailed explanation goes here
+
+if nargin < 8
+    isDisplay = 1;
+end
+
 state_infomation.population = state_population;
 state_infomation.size = state_size;
 state_infomation.city_centers = city_centers;
 
 %%% radius, center, population, political_affiliation, state 
-cities = generate_cities(city_radiuses, city_centers, city_populations, city_political_affiliations, state_infomation);
+cities = generate_cities(city_radiuses, city_centers, city_populations, city_political_affiliations, state_infomation, isDisplay);
 
 % compiling all home locations
 state_infomation.homes = [];
@@ -15,7 +20,9 @@ state_infomation.homes = [state_infomation.homes; ...
                cities{i}.homes(1,:)',cities{i}.homes(2,:)',cities{i}.homes(3,:)';];
 end
 
-disp(['finished compiling all home locations'])
+if isDisplay
+    disp(['finished compiling all home locations'])
+end
 
 % take out any houses that are in the middle of two cities
 state_infomation.homes_repeat = [];
@@ -44,16 +51,20 @@ state_infomation.homes = state_infomation.homes(a,:,:);
 % remove homes that double from several cities
 [~,idx,~] = unique(state_infomation.homes(:,1:2), 'rows');
 state_infomation.homes = state_infomation.homes(idx,:,:);
-disp(['finished replacing all repeated homes'])
 
+if isDisplay
+    disp(['finished replacing all repeated homes'])
+end
              
 % generate matix of the state                
 state = zeros(state_infomation.size(1),state_infomation.size(2),2);
 for i = 1:size(state_infomation.homes,1)
     state(state_infomation.homes(i,1),state_infomation.homes(i,2),1) = 1;
 end
-disp(['finished generate matix of the state'])
 
+if isDisplay
+    disp(['finished generate matix of the state'])
+end
 
 % add in remaining population not around the cities
 others.population = state_infomation.population-nnz(state(:,:,1)); 
@@ -66,15 +77,19 @@ for i = 1:size(interm,1)
     others.homes(i,:) = [row(interm(i)), col(interm(i)), others.political_affiliation(i)];
 end 
 state_infomation.homes = [state_infomation.homes; others.homes];
-disp(['finished adding in remaining population not around the cities'])
 
+if isDisplay
+    disp(['finished adding in remaining population not around the cities'])
+end
 
 % add in everyone's political affiliation 
 for i = 1:size(state_infomation.homes,1)
     state(state_infomation.homes(i,1),state_infomation.homes(i,2),2) = state_infomation.homes(i,3);
 end
-disp(['finished adding in everyone`s political affiliation'])
-
+    
+if isDisplay
+    disp(['finished adding in everyone`s political affiliation'])
+end
 
 % assign 
 state_infomation.republicans = find(state_infomation.homes(:,3) == 1);

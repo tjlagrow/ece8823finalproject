@@ -5,7 +5,7 @@ This script uses smallerado as the exam
 %}
 
 isRandomization = 1;
-isPlot = 0;
+isPlot = 1;
 
 %% init
 
@@ -33,9 +33,9 @@ end
 
 if isPlot == 1
     figure, 
-    subplot(3,3,1), imshow(ground_truth_image), title('Colorado Districts')
+    subplot(1,8,1), imshow(ground_truth_image), title('Colorado Districts')
     for i = 1:7
-        subplot(3,3,i+1), imagesc(labels{i}), title(['District ', num2str(i)]), axis tight,
+        subplot(1,8,i+1), imagesc(labels{i}), title(['District ', num2str(i)]), axis square,
     end
 end
 %% upsample annotations to make same size as generated data

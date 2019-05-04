@@ -26,6 +26,13 @@ script_run_soft_start_kmeans;
 %% Step 5: Warm Start with Compactness Regularization/s
 
 script_run_soft_start_L1_min_kmeans;
-
 script_run_soft_start_L2_min_kmeans;
+
+%% Step 6: Optimizing Constrained Kmeans
+
+script_constrainedKmeans_v2;
+
+%% Step 7: Evaluation of Minimizations over Number of Clusters
+
+script_evaluate_number_of_clusters;
 

@@ -1,6 +1,10 @@
-function cities = generate_cities(radius, center, population, political_affiliation, state)
+function cities = generate_cities(radius, center, population, political_affiliation, state, isDisplay)
 %GENERATE_CITY Summary of this function goes here
 %   Detailed explanation goes here
+
+if nargin < 6
+    isDisplay = 1;
+end
 
 cities = cell(size(radius, 1),1);
 parfor i = 1:size(radius, 1)
@@ -13,7 +17,9 @@ parfor i = 1:size(radius, 1)
     cities{i}.homes = [round(cities{i}.radius*x + cities{i}.center(1)); ...
                        round(cities{i}.radius*y + cities{i}.center(2)); ...
                        cities{i}.political_affiliation]; 
-    disp(['finished generating city: ', num2str(i)])
+    if isDisplay               
+        disp(['finished generating city: ', num2str(i)])
+    end
 end
 end
 

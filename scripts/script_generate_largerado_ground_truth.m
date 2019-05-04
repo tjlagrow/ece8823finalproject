@@ -78,7 +78,7 @@ if isPlot == 1
     %%%
 
     figure,
-    subplot(331),
+    subplot(181),
     imshow(fliplr(rot90(ground_truth_image_upscale,2))), hold on,
     scatter(largerado_information.homes(largerado_information.republicans,1),largerado_information.homes(largerado_information.republicans,2),'r.'), hold on,
     scatter(largerado_information.homes(largerado_information.democrats,1),largerado_information.homes(largerado_information.democrats,2),'b.'), hold on,
@@ -86,7 +86,7 @@ if isPlot == 1
     camroll(180),
 
     for i = 1:7
-        subplot(3,3,i+1), 
+        subplot(1,8,i+1), 
         imshow(fliplr(rot90(ground_truth_image_upscale,2))), hold on,
         if ~isempty(population_labels_ground_truth_largerado{i})
             scatter(population_labels_ground_truth_largerado{i}(:,1), population_labels_ground_truth_largerado{i}(:,2),'g.'), hold on,

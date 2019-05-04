@@ -1,15 +1,21 @@
-function [largerado, largerado_information] = generate_largerado(isRandomization,isPlot)
+function [largerado, largerado_information, city_centers] = generate_largerado(isRandomization,isPlot,isDisplay)
 %{
 script_generate_colorado.m
 
 %}
-disp('Starting to generate Largerado')
 
 if nargin < 1 
     isRandomization = 1;
 end
 if nargin < 2
     isPlot = 1;
+end
+if nargin < 3
+    isDisplay = 1;
+end
+
+if isDisplay
+    disp('Starting to generate Largerado')
 end
 
 % 1 for default repoducibility
@@ -73,7 +79,8 @@ state_political_affiliations = 0.49;
                                                   city_centers, ...
                                                   city_populations, ...
                                                   city_political_affiliations, ...
-                                                  state_political_affiliations);
+                                                  state_political_affiliations, ...
+                                                  isDisplay);
 
 %% plot
 if isPlot == 1
@@ -90,11 +97,11 @@ if isPlot == 1
 
     legend('republicans','democrats','city centers'), 
     title('Largerado'), 
-    disp(['Largerado: percent of democrats: ',num2str(size(largerado_information.democrats,1)/largerado_information.population), ', percent of republicans: ',num2str(size(largerado_information.republicans,1)/largerado_information.population)]);
-
 end
 
-
+if isDisplay
+        disp(['Largerado: percent of democrats: ',num2str(size(largerado_information.democrats,1)/largerado_information.population), ', percent of republicans: ',num2str(size(largerado_information.republicans,1)/largerado_information.population)]);
+end
 
 end
 

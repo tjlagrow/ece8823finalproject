@@ -1,16 +1,21 @@
-function [smallerado, smallerado_information] = generate_smallerado(isRandomization,isPlot)
+function [smallerado, smallerado_information, city_centers] = generate_smallerado(isRandomization,isPlot,isDisplay)
 %{
 script_generate_colorado.m
 
 %}
-disp('Starting to generate Smallerado')
-
 
 if nargin < 1 
     isRandomization = 1;
 end
 if nargin < 2
     isPlot = 1;
+end
+if nargin < 3
+    isDisplay = 1;
+end
+
+if isDisplay
+    disp('Starting to generate Smallerado')
 end
 
 % 1 for default repoducibility
@@ -51,7 +56,7 @@ end
 % since this is SMALLERADO each data point represents 1000 houses
 % (this essentially takes into account neighborhoods or close residents
 % that share the same political view)
-state_population = 5029;%196;
+state_population = 5029;
 state_size = [40860,30110];
 city_radiuses = [645,521,490,410,613,270,291,210,256,197]';
 city_centers = [[round(state_size(1)*0.5647), round(state_size(2)*0.6416)]; ...
@@ -74,7 +79,8 @@ state_political_affiliations = 0.49;
                                                   city_centers, ...
                                                   city_populations, ...
                                                   city_political_affiliations, ...
-                                                  state_political_affiliations);
+                                                  state_political_affiliations, ...
+                                                  isDisplay);
 
 %% plot
 if isPlot == 1
@@ -92,11 +98,10 @@ if isPlot == 1
     legend('republicans','democrats','city centers'), 
     title('Smallerado'), 
 end
-disp(['Smallerado: percent of democrats: ',num2str(size(smallerado_information.democrats,1)/smallerado_information.population), ', percent of republicans: ',num2str(size(smallerado_information.republicans,1)/smallerado_information.population)]);
 
-
-
-
+if isDisplay
+    disp(['Smallerado: percent of democrats: ',num2str(size(smallerado_information.democrats,1)/smallerado_information.population), ', percent of republicans: ',num2str(size(smallerado_information.republicans,1)/smallerado_information.population)]);
+end
 
 end
 

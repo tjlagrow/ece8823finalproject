@@ -1,15 +1,21 @@
-function [newflormedium, newflormedium_information] = generate_newflormedium(isRandomization,isPlot)
+function [newflormedium, newflormedium_information] = generate_newflormedium(isRandomization,isPlot,isDisplay)
 %{
 script for generating the synthetic data for the nobel land of  New FlorMedium
 %}
 
-disp('Starting to generate New Flormedium')
 
 if nargin < 1 
     isRandomization = 1;
 end
 if nargin < 2
     isPlot = 1;
+end
+if nargin < 3
+    isDisplay = 1;
+end
+
+if isDisplay
+    disp('Starting to generate New Flormedium')
 end
 
 % 1 for default repoducibility
@@ -37,18 +43,21 @@ state_political_affiliations = 0.5;
                                                       city_centers, ...
                                                       city_populations, ...
                                                       city_political_affiliations, ...
-                                                      state_political_affiliations);                  
+                                                      state_political_affiliations, ...
+                                                      isDisplay);                  
                           
 %%% Plot the state if isPlot is 1
 if isPlot == 1
     figure,
     scatter(newflormedium_information.homes(newflormedium_information.republicans,1),newflormedium_information.homes(newflormedium_information.republicans,2),'r.'), hold on,
     scatter(newflormedium_information.homes(newflormedium_information.democrats,1),newflormedium_information.homes(newflormedium_information.democrats,2),'b.'), hold on,
-    scatter(city_centers(:,1), city_centers(:,2), 150, 'k+'),
+    scatter(city_centers(:,1), city_centers(:,2), 150, 'g+'),
     legend('republicans','democrats','city center'), title('New Flormedium'), xlim([0 10000]), ylim([0 10000]), axis tight,
 end
 
-disp(['New Flormedium: percent of democrats: ',num2str(size(newflormedium_information.democrats,1)/newflormedium_information.population), ', percent of republicans: ',num2str(size(newflormedium_information.republicans,1)/newflormedium_information.population)]);
+if isDisplay
+    disp(['New Flormedium: percent of democrats: ',num2str(size(newflormedium_information.democrats,1)/newflormedium_information.population), ', percent of republicans: ',num2str(size(newflormedium_information.republicans,1)/newflormedium_information.population)]);
+end
 
 end
 

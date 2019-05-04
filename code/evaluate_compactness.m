@@ -8,7 +8,7 @@ script to help evaluate compactness
 
 custer_euclidean_score = [];
 for i = 1:length(population_labels)
-    number_of_points = length(population_labels{i});
+    number_of_points = size(population_labels{i},1);
     center_array = ones(number_of_points, 2);
     center_array = [center_array(:,1)*ground_truth_centers(i,1) center_array(:,2)*ground_truth_centers(i,2)];
     city_block_distance = round(sum(abs(center_array(:,1)-population_labels{i}(:,1))) + sum(abs(center_array(:,2)-population_labels{i}(:,2))));
